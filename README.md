@@ -25,7 +25,11 @@ To obtain permission to use Reyodash, please contact the developers/authoritaria
 
 ## Not following 
 
-Upon usage of this software without official permission can include legal action as DMCA but isnt limited to it.
+Upon usage of this software without official permission can include legal action as DMCA but isnt limited to it. 
+
+## Kindly read official Terms
+
+- https://reyo.run/tos
 
 ## Installation
 
