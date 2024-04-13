@@ -6,12 +6,11 @@
 ## Features
 
 - **User-Friendly Interface**: A clean and intuitive dashboard design.
-- **Server Management**: Start, stop, and manage your servers effortlessly.
+- **Creating servers**: Create servers effortlessly just by editing settings.json.
 - **Resource Monitoring**: Keep track of CPU, RAM, and disk usage.
-- **File Manager**: Manage server files directly from the dashboard.
-- **User Permissions**: Assign roles and permissions to users with ease.
+- **User Permissions**: Assign roles and permissions to users with ease same as hola.
 - **Billing & Invoices**: Monitor billing information and manage invoices.
-- **Custom Themes**: Personalize the dashboard with custom themes.
+- **Custom colours**: Personalize the dashboard change the colours.
 - **Responsive Design**: Access the dashboard from any device.
 
 ## ⚠️ Warning
@@ -24,6 +23,11 @@ Unauthorized use of Reyodash without proper permission may result in legal actio
 
 To obtain permission to use Reyodash, please contact the developers/authoritarians of Reyo and request a legal document granting you the right to use the dashboard.
 
+## Not following 
+
+Upon usage of this software without official permission can include legal action as DMCA but isnt limited to it.
+
 ## Installation
 
-1) Download Hola client v1.8 and replace the files
+1) Download Hola client v1.8 and replace the files thats it! 
+2) Config settings.json and done
