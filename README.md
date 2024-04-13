@@ -15,7 +15,7 @@
 
 ## ⚠️ Warning
 
-The usage of this dashboard, Reyodash, is not permitted freely. To use Reyodash, you must obtain permission from the developers/authoritarians of Reyo. Permission should be obtained in a legal document, explicitly stating that the name "Reyodash" is permitted to be used in conjunction with this dashboard.
+The usage of this dashboard, Reyodash, is not permitted freely. To use Reyodash, you must obtain permission from the developers/authoritarians of Reyo. Permission should be obtained in a legal document, explicitly stating that the dashboard ( "Reyodash" ) is permitted to be used in your website/host etc.
 
 Unauthorized use of Reyodash without proper permission may result in legal action.
 
