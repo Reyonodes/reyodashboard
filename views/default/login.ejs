@@ -1,0 +1,100 @@
+<!doctype html>
+<html class="h-full bg-[#0f1012]">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="../assets/tailwind.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" defer>
+   </head>
+   <body class="h-full" style="font-family: 'Space Grotesk'">
+      <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+         <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 class="mt-6 text-center text-2xl font-medium leading-9 text-white">Welcome!</h2>
+            <h2 class="mt-1 text-center text-sm font-normal text-zinc-500">Login to your account.</h2>
+         </div>
+         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+            <div class="bg-zinc-600/10 px-6 py-12 border border-white/5 rounded-3xl sm:px-12">
+               <% if (!req.query.err) { %>
+               <div>
+                  <div class="relative mb-10">
+                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-white/10"></div>
+                     </div>
+                     <div class="relative flex justify-center text-sm font-medium leading-6">
+                        <span class="bg-[#151619] px-6 text-white">Choose a login method</span>
+                     </div>
+                  </div>
+               </div>
+               <form class="space-y-6" action="#" method="POST">
+                  <div>
+                     <a href="../login" class="flex w-full justify-center rounded-full bg-blue-400/10 px-6 py-3 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-400/20">Login using Discord</a>
+                  </div>
+               </form>
+            </div>
+            <% } %>
+            <% if (req.query.err == "INVALIDCODE") { %>
+            <div>
+               <div class="relative mb-10">
+                  <h2 class="text-center text-xl font-medium leading-9 text-white">Authentication failure</h2>
+                  <h2 class="mt-1 text-center text-sm font-normal text-zinc-500">The OAuth2 code was invalid. Please try again.</h2>
+               </div>
+            </div>
+            <form class="space-y-6" action="#" method="POST">
+               <div>
+                  <a href="../login" class="flex w-full justify-center rounded-full bg-blue-400/10 px-6 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-400/20">Continue</a>
+               </div>
+            </form>
+         </div>
+         <% } %>
+         <% if (req.query.err == "CANNOTGETINFO") { %>
+         <div>
+            <div class="relative mb-10">
+               <h2 class="text-center text-xl font-medium leading-9 text-white">Authentication failure</h2>
+               <h2 class="mt-1 text-center text-sm font-normal text-zinc-500">The client area could not get your user information and details from Skyport. Try again later.</h2>
+            </div>
+         </div>
+         <form class="space-y-6" action="#" method="POST">
+            <div>
+               <a href="../login" class="flex w-full justify-center rounded-full bg-blue-400/10 px-6 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-400/20">Continue</a>
+            </div>
+         </form>
+      </div>
+      <% } %>
+      <% if (req.query.err == "BLACKLISTEDUSER") { %>
+      <div>
+         <div class="relative justify-center">
+            <h2 class="text-center text-xl font-medium leading-9 text-white">Account is banned</h2>
+            <h2 class="mt-1 text-center text-sm font-normal text-zinc-500">You are banned from accessing our platform.</h2>
+            <div class="bg-gray-500/5 p-8 mt-8 rounded-3xl">
+               <p class="text-zinc-400 text-xs">Duration: <span class="text-white">Permanent</span></p>
+               <p class="text-zinc-400 text-xs">Reason: <span class="text-white">Violation of Terms of Use</span></p>
+               <p class="text-zinc-400 text-xs">Time Left: <span class="text-white">-</span></p>
+            </div>
+            <div class="bg-amber-400/5 p-8 mt-8 rounded-3xl">
+               <p class="text-amber-300 text-sm">You are no longer allowed to use our services.</p>
+               <p class="text-amber-300/80 font-light text-xs mt-2">Further attempts to register will result in immediate account suspension. You cannot appeal this decision.</p>
+            </div>
+         </div>
+      </div>
+      </div>
+      <% } %>
+      <% if (req.query.err == "ANTIALT") { %>
+      <div>
+         <div class="relative mb-10">
+            <h2 class="text-center text-xl font-medium leading-9 text-white">Authentication failure</h2>
+            <h2 class="mt-1 text-center text-sm font-normal text-zinc-500">Alt accounts are not allowed. Please login to your original Discord account to continue using our services.</span></h2>
+         </div>
+      </div>
+      <form class="space-y-6" action="#" method="POST">
+         <div>
+            <a href="../login" class="flex w-full justify-center rounded-full bg-blue-400/10 px-6 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-400/20">Continue</a>
+         </div>
+      </form>
+      </div>
+      <% } %>
+      </div>
+      </div>
+   </body>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html class="h-full bg-[#0f1012]">
+
+<!-- Header component -->
+<%- include('./components/header') %>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- End header -->
+
+<body class="h-full" style="font-family: 'Space Grotesk'">
+    <div>
+        <!-- Sidebar component -->
+        <%- include('./components/sidebar') %>
+        <!-- End sidebar -->
+        <main id="content">
+            <div class="pb-2 px-10 pt-10">
+                <div class="flex mt-16 gap-y-8 items-center justify-center" id="leaderboard">
+                    <!-- Leaderboard content will be dynamically added here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fetch leaderboard data
+        axios.get('/leaderboard')
+            .then(function (response) {
+                const leaderboardData = response.data.slice(0, 6); // Fetching the first 6 results
+                displayLeaderboard(leaderboardData);
+            })
+            .catch(function (error) {
+                console.error('Error fetching leaderboard:', error);
+            });
+
+        function displayLeaderboard(leaderboardData) {
+            const leaderboardContainer = document.getElementById('leaderboard');
+
+            // Create the first row (positions 1-3)
+            const firstRow = document.createElement('div');
+            firstRow.className = 'flex gap-y-8 items-center justify-center';
+
+            leaderboardData.slice(0, 3).forEach((player, index) => {
+                const podiumElement = createPodiumElement(player, index + 1);
+                firstRow.appendChild(podiumElement);
+            });
+
+            leaderboardContainer.appendChild(firstRow);
+
+            // Create the second row (positions 4-6)
+            const secondRow = document.createElement('div');
+            secondRow.className = 'flex gap-y-8 items-center justify-center';
+
+            leaderboardData.slice(3, 6).forEach((player, index) => {
+                const podiumElement = createPodiumElement(player, index + 4);
+                secondRow.appendChild(podiumElement);
+            });
+
+            leaderboardContainer.appendChild(secondRow);
+        }
+
+        function createPodiumElement(player, position) {
+            const podiumElement = document.createElement('div');
+            podiumElement.className = `relative mr-12 ml-12 rounded-3xl bg-zinc-900/80`;
+
+            const imageElement = document.createElement('img');
+            imageElement.src = `https://cdn.discordapp.com/avatars/${player.id}/${player.avatar}.png`;
+            imageElement.alt = `#${position}`;
+            imageElement.className = 'w-24 h-24 rounded-3xl bg-zinc-900/80';
+
+            const textElement = document.createElement('div');
+            textElement.className = 'absolute inset-0 flex flex-col justify-center items-center';
+            textElement.innerHTML = `
+                <p class="text-3xl font-bold text-white mt-56">#0${position}</p>
+                <p class="text-md text-zinc-300 mt-2">${player.global}</p>
+                <p class="text-sm text-zinc-500">${player.coins}.00 HCX</p>
+            `;
+
+            podiumElement.appendChild(imageElement);
+            podiumElement.appendChild(textElement);
+
+            return podiumElement;
+        }
+    });
+</script>
+
+</body>
+
+</html>

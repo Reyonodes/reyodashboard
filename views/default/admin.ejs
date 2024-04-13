@@ -1,0 +1,130 @@
+<!doctype html>
+<html class="h-full bg-[#0f1012]">
+
+<!-- Header component -->
+<%- include('./components/header') %>
+<!-- End header -->
+
+<body class="h-full" style="font-family: 'Space Grotesk'">
+    <div>
+        <!-- Sidebar component -->
+        <%- include('./components/sidebar') %>
+        <!-- End sidebar -->
+        <main id="content">
+            <% if (req.query.err && req.query.err !== "none") { %>
+            <div class="border border-amber-400/10 bg-amber-400/5 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-6 w-6 text-amber-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-amber-400">
+                            An error was encountered: <code><%= req.query.err %></code>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <% if (req.query.err && req.query.err == "none") { %>
+            <div class="border border-green-400/10 bg-green-400/5 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-6 w-6 text-green-400">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-green-400 mt-0.5">
+                            Success! Action completed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <div class="pb-2 px-10 pt-8">
+                <h2 class="text-base font-semibold leading-7 text-white">Add coins</h2>
+                <p class="mt-1 pb-4 text-sm leading-6 text-zinc-500">Add coins to a user's account.</p>
+            </div>
+            <div class="pb-2 px-10 border-b border-white/5 ">
+                <form action="/addcoins" method="get">
+                    <div class="grid grid-cols-1 gap-x-6 sm:grid-cols-6">
+                        <div class="sm:col-span-3">
+                            <label for="id" class="block text-sm font-normal leading-6 text-zinc-400 mb-2">User ID</label>
+                            <div class="mt-2">
+                                <input type="text" id="id" name="id"
+                                    class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6"
+                                    placeholder="00000000000000000000">
+                            </div>
+                            <label for="coins" class="block text-sm font-normal leading-6 text-zinc-400 mb-2 mt-4">Amount</label>
+                            <div class="mt-2">
+                                <input type="text" id="coins" name="coins"
+                                    class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6"
+                                    placeholder="200">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-6 pb-8 flex items-center justify-start gap-x-2">
+                        <button type="submit"
+                            class="rounded-full bg-blue-400/10 px-6 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-400/20 sm:order-none">Add</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- New form for /addresources -->
+            <div class="pb-2 px-10 pt-8">
+                <h2 class="text-base font-semibold leading-7 text-white">Set resources</h2>
+                <p class="mt-1 pb-4 text-sm leading-6 text-zinc-500">Set resources for a user.</p>
+            </div>
+            <div class="pb-2 px-10 border-b border-white/5">
+                <form action="/setresources method="get">
+                    <div class="grid grid-cols-1 gap-x-6 sm:grid-cols-6">
+                        <div class="sm:col-span-3">
+                            <label for="id" class="block text-sm font-normal leading-6 text-zinc-400 mb-2">User ID</label>
+                            <div class="mt-2">
+                                <input type="text" id="id" name="id"
+                                    class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6"
+                                    placeholder="00000000000000000000">
+                            </div>
+                            <label for="ram" class="block text-sm font-normal leading-6 text-zinc-400 mb-2 mt-4">RAM</label>
+                            <div class="mt-2">
+                                <input type="text" id="ram" name="ram"
+                                    class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6"
+                                    placeholder="1024">
+                            </div>
+                            <label for="disk" class="block text-sm font-normal leading-6 text-zinc-400 mb-2 mt-4">Disk</label>
+                            <div class="mt-2">
+                                <input type="text" id="disk" name="disk"
+                                    class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6"
+                                    placeholder="10240">
+                            </div>
+                            <label for="cpu" class="block text-sm font-normal leading-6 text-zinc-400 mb-2 mt-4">CPU</label>
+                            <div class="mt-2">
+                                <input type="text" id="cpu" name="cpu"
+                                    class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6"
+                                    placeholder="100">
+                            </div>
+                            <label for="servers" class="block text-sm font-normal leading-6 text-zinc-400 mb-2 mt-4">Servers</label>
+                            <div class="mt-2">
+                                <input type="text" id="servers" name="servers"
+                                    class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6"
+                                    placeholder="5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-6 pb-8 flex items-center justify-start gap-x-2">
+                        <button type="submit"
+                            class="rounded-full bg-blue-400/10 px-6 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-400/20 sm:order-none">Add</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

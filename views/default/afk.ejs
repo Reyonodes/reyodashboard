@@ -1,0 +1,23 @@
+<!doctype html>
+<html class="h-full bg-[#0f1012]">
+
+<!-- Header component -->
+<%- include('./components/header') %>
+<!-- End header -->
+
+<body class="h-full" style="font-family: 'Space Grotesk'">
+<div>
+    <!-- Sidebar component -->
+    <%- include('./components/sidebar') %>
+    <!-- End sidebar -->
+    <%- include('components/skeleton') %>
+    <main id="content">
+      <h1 class="text-white text-lg px-8 pt-8">AFK earning active</h1>
+      <p class="text-zinc-400 text-sm px-8 pt-1">You'll earn 1 HCX in <span id="arciotimer"><%= settings.api.arcio["afk page"].every %></span> seconds</p>
+      <p class="text-zinc-400 text-sm px-8 pt-1">This session, you've earned <span id="arciogainedcoins">0</span> HCX</p>
+    </main>
+    <script>
+      <%- arcioafktext %>
+    </script>
+  </div>
+</div>

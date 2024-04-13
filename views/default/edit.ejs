@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="h-full bg-[#0f1012]">
+   <!-- Header component -->
+   <%- include('./components/header') %>
+   <!-- End header -->
+   <body class="h-full" style="font-family: 'Space Grotesk'">
+      <div>
+         <!-- Sidebar component -->
+         <%- include('./components/sidebar') %>
+         <!-- End sidebar -->
+         <%- include('components/skeleton') %>
+         <main id="content">
+            <div class="p-8">
+               <label class="block text-sm font-normal leading-6 text-white mb-2">Memory (GiB)</label>
+               <div class="mt-2 mb-8">
+                  <input type="text" id="ram" class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6" placeholder="2">
+               </div>
+               <label class="block text-sm font-normal leading-6 text-white mb-2">Storage (GiB)</label>
+               <div class="mt-2 mb-8">
+                  <input type="text" id="disk" class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6" placeholder="10">
+               </div>
+               <label class="block text-sm font-normal leading-6 text-white mb-2">CPU Cores</label>
+               <div class="mt-2 mb-8">
+                  <input type="text" id="cpu" class="block w-96 rounded-full border-none py-3 pl-6 bg-zinc-600/20 text-white ring-1 ring-inset ring-zinc-600/30 placeholder:text-zinc-500 focus:ring-1 focus:ring-inset focus:ring-blue-400 transition sm:text-sm sm:leading-6" placeholder="1">
+               </div>
+               <button onclick="doYourJobForOnceAndActuallyEditTheServerWithoutErroring()" class="rounded-full bg-blue-400/10 px-6 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-400/20 sm:order-none">Update server resources</button>
+               <script>
+                  async function doYourJobForOnceAndActuallyEditTheServerWithoutErroring() {
+                      let ram = encodeURIComponent(document.getElementById("ram").value);
+                      let disk = encodeURIComponent(document.getElementById("disk").value);
+                      let cpu = encodeURIComponent(document.getElementById("cpu").value);
+                      document.location.href = `/modify?id=<%= req.query.id %>&ram=${ram*1024}&disk=${disk*1024}&cpu=${cpu*100}`;
+                  };
+               </script>
+            </div>
+         </main>
+      </div>
+      </div>
+   </body>
+</html>

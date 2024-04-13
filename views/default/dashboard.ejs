@@ -1,0 +1,196 @@
+<!doctype html>
+<html class="h-full bg-[#0f1012]">
+   <!-- Header component -->
+   <%- include('./components/header') %>
+   <!-- End header -->
+   <body class="h-full" style="font-family: 'Space Grotesk'">
+      <div>
+         <!-- Sidebar component -->
+         <%- include('./components/sidebar') %>
+         <!-- End sidebar -->
+         <main id="content">
+            <% if (req.query.err && req.query.err == "none") { %>
+            <div class="border border-green-400/10 bg-green-400/5 p-4">
+               <div class="flex">
+                  <div class="flex-shrink-0">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-6 w-6 text-green-400">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                           d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                     </svg>
+                  </div>
+                  <div class="ml-3">
+                     <p class="text-sm text-green-400 mt-0.5">
+                        Success! Action completed.
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <% } %>
+            <header>
+               <!-- Heading -->
+               <div class="flex flex-col items-start justify-between gap-x-8 gap-y-4 bg-zinc-700/10 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
+                  <div>
+                     <div class="flex items-center gap-x-3">
+                        <h1 class="flex gap-x-3 text-base leading-7">
+                           <span class="font-semibold text-white">Dashboard</span>
+                        </h1>
+                     </div>
+                  </div>
+                  <div class="flex text-xs">
+                     <div class="order-first flex-none rounded-full bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 ring-1 ring-inset ring-blue-400/30 sm:order-none">Active</div>
+                     <select id="unitDropdown" class="order-first flex-none rounded-full ml-2 bg-zinc-900 border-none px-2 py-1 text-xs font-medium text-zinc-400 ring-1 ring-inset ring-zinc-400/10 sm:order-none focus:outline-none focus:ring focus:border-zinc-300">
+                        <option value="gib">Resources in GiB</option>
+                        <option value="mib">Resources in MiB</option>
+                     </select>
+                  </div>
+               </div>
+               <%
+                  let ram = 0;
+                  let disk = 0;
+                  let cpu = 0;
+                  let servers = pterodactyl.relationships.servers.data.length;
+                  for (let i = 0, len = pterodactyl.relationships.servers.data.length; i < len; i++) {
+                      ram = ram + (typeof pterodactyl.relationships.servers.data[i].attributes.limits.memory == "number" ? pterodactyl.relationships.servers.data[i].attributes.limits.memory : 0);
+                      disk = disk + (typeof pterodactyl.relationships.servers.data[i].attributes.limits.disk == "number" ? pterodactyl.relationships.servers.data[i].attributes.limits.disk : 0);
+                      cpu = cpu + (typeof pterodactyl.relationships.servers.data[i].attributes.limits.cpu == "number" ? pterodactyl.relationships.servers.data[i].attributes.limits.cpu : 0);
+                  }
+                  %>
+               <!-- Stats -->
+               <div class="grid grid-cols-1 bg-zinc-700/10 sm:grid-cols-2 lg:grid-cols-4">
+                  <div class="border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8">
+                     <p class="text-sm font-medium leading-6 text-zinc-400">Available memory</p>
+                     <p class="mt-2 flex items-baseline gap-x-2">
+                        <span class="memory-value text-4xl font-semibold tracking-tight text-white" id="memory-value"><%= (((packages ? packages.ram : 0) + extraresources.ram + - ram)/1024).toFixed(2) %></span>
+                        <span class="unit-text text-md text-zinc-400">GiB</span>
+                     </p>
+                  </div>
+                  <div class="border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l">
+                     <p class="text-sm font-medium leading-6 text-zinc-400">Available storage</p>
+                     <p class="mt-2 flex items-baseline gap-x-2">
+                        <span class="memory-value text-4xl font-semibold tracking-tight text-white" id="memory-value"><%= (((packages ? packages.disk : 0) + extraresources.disk + - disk)/1024).toFixed(2) %></span>
+                        <span class="unit-text text-md text-zinc-400">GiB</span>
+                     </p>
+                  </div>
+                  <div class="border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 lg:border-l">
+                     <p class="text-sm font-medium leading-6 text-zinc-400">Available CPU cores</p>
+                     <p class="mt-2 flex items-baseline gap-x-2">
+                        <span class="text-4xl font-semibold tracking-tight text-white" id="memory-value"><%= (((packages ? packages.cpu : 0) + extraresources.cpu + - cpu)/100).toFixed(2) %></span>
+                     </p>
+                  </div>
+                  <div class="border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l">
+                     <p class="text-sm font-medium leading-6 text-zinc-400">Servers in project</p>
+                     <p class="mt-2 flex items-baseline gap-x-2">
+                        <span class="text-4xl font-semibold tracking-tight text-white" id="memory-value"><%= servers %></span>
+                     </p>
+                  </div>
+               </div>
+            </header>
+            <script>
+               // JavaScript function to handle unit conversion
+               document.getElementById('unitDropdown').addEventListener('change', function () {
+                 const selectedUnit = this.value;
+                 const memoryElements = document.querySelectorAll('.memory-value');
+                 const unitTextElements = document.querySelectorAll('.unit-text');
+               
+                 memoryElements.forEach(function (element, index) {
+                   const currentValue = parseFloat(element.textContent);
+                   if (selectedUnit === 'mib') {
+                     // Convert to MiB and remove .00
+                     const newValue = (currentValue * 1024).toFixed(2);
+                     element.textContent = newValue.endsWith('.00') ? parseInt(newValue) : newValue;
+                     unitTextElements[index].textContent = 'MiB';
+                   } else {
+                     // Keep as GiB
+                     element.textContent = (currentValue / 1024).toFixed(2);
+                     unitTextElements[index].textContent = 'GiB';
+                   }
+                 });
+               });
+            </script>
+            <!-- Activity list -->
+            <div class="border-t border-white/10 pt-6">
+               <h2 class="px-4 text-base font-semibold leading-7 text-white sm:px-6 lg:px-8">Your servers</h2>
+               <p class="px-8 text-zinc-400 text-xs font-normal">View all of the servers that you have deployed.</p>
+               <table class="mt-6 w-full whitespace-nowrap text-left">
+                  <colgroup>
+                     <col class="w-full sm:w-4/12">
+                     <col class="lg:w-4/12">
+                     <col class="lg:w-2/12">
+                     <col class="lg:w-1/12">
+                  </colgroup>
+                  <thead class="border-b border-white/10 text-sm leading-6 text-white">
+                     <tr>
+                        <th scope="col" class="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8">Name</th>
+                        <th scope="col" class="py-2 pl-0 pr-4 text-right font-semibold sm:pr-8 sm:text-left lg:pr-20">Status</th>
+                        <th scope="col" class="hidden py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8">Deployed at</th>
+                        <th scope="col" class="hidden py-2 pl-0 pl-8 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8">Actions</th>
+                     </tr>
+                  </thead>
+                  <tbody class="divide-y divide-white/5">
+                     <% for (let i = 0, len = pterodactyl.relationships.servers.data.length; i < len; i++) { %>
+                     <tr>
+                        <td class="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
+                           <div class="flex items-center gap-x-4">
+                              <a href="<%= settings.pterodactyl.domain %>/server/<%= pterodactyl.relationships.servers.data[i].attributes.identifier %>" class="truncate text-sm font-medium leading-6 text-white"><%= pterodactyl.relationships.servers.data[i].attributes.name.length > 15 ? pterodactyl.relationships.servers.data[i].attributes.name.slice(0, 12) + "..." : pterodactyl.relationships.servers.data[i].attributes.name %></a>
+                           </div>
+                        </td>
+                        <td class="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
+                           <div class="flex items-center justify-end gap-x-2 sm:justify-start">
+                              <time class="text-zinc-400 sm:hidden" datetime="2023-01-23T11:00">45 minutes ago</time>
+                              <div class="flex-none rounded-full p-1 text-green-400 bg-green-400/10">
+                                 <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                              </div>
+                              <div class="hidden text-white sm:block">Active</div>
+                           </div>
+                        </td>
+                        <%
+                           const timestamp = pterodactyl.relationships.servers.data[i].attributes.created_at;
+                           
+                           // Convert the timestamp to a Date object
+                           const date = new Date(timestamp);
+                           
+                           // Calculate the time difference in milliseconds
+                           const timeDifference = new Date() - date;
+                           
+                           // Convert milliseconds to seconds
+                           const seconds = Math.floor(timeDifference / 1000);
+                           
+                           // Calculate different time units
+                           const minutes = Math.floor(seconds / 60);
+                           const hours = Math.floor(minutes / 60);
+                           const days = Math.floor(hours / 24);
+                           const years = Math.floor(days / 365);
+                           
+                           // Format the time difference in a human-readable way
+                           let formattedTime;
+                           
+                           if (years > 0) {
+                             formattedTime = years + (years === 1 ? ' year' : ' years') + ' ago';
+                           } else if (days > 0) {
+                             formattedTime = days + (days === 1 ? ' day' : ' days') + ' ago';
+                           } else if (hours > 0) {
+                             formattedTime = hours + (hours === 1 ? ' hour' : ' hours') + ' ago';
+                           } else if (minutes > 0) {
+                             formattedTime = minutes + (minutes === 1 ? ' minute' : ' minutes') + ' ago';
+                           } else {
+                             formattedTime = seconds + (seconds === 1 ? ' second' : ' seconds') + ' ago';
+                           }
+                           %>
+                        <td class="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-zinc-400 sm:table-cell sm:pr-6 lg:pr-8">
+                           <time datetime="2023-01-23T11:00"><%= formattedTime %></time>
+                        </td>
+                        <td class="hidden py-4 pl-32 text-right text-sm leading-6 text-zinc-400 sm:table-cell">
+                           <a href="../servers/edit?id=<%= pterodactyl.relationships.servers.data[i].attributes.id %>" class="bg-[#131417] border border-zinc-400/10 rounded-lg px-6 py-2 text-zinc-300">Edit</a>
+                           <a href="../delete?id=<%= pterodactyl.relationships.servers.data[i].attributes.id %>" class="bg-red-400/5 border border-red-400/10 ml-2 mr-8 rounded-lg px-6 py-2 text-red-400">Delete</a>
+                        </td>
+                        </tr
+                        <% } %>
+                  </tbody>
+               </table>
+            </div>
+         </main>
+      </div>
+      </div>
+   </body>
+</html>

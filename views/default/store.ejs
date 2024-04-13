@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="h-full bg-[#0f1012]">
+   <!-- Header component -->
+   <%- include('./components/header') %>
+   <!-- End header -->
+   <body class="h-full" style="font-family: 'Space Grotesk'">
+      <div>
+         <!-- Sidebar component -->
+         <%- include('./components/sidebar') %>
+         <!-- End sidebar -->
+         <%- include('components/skeleton') %>
+         <main id="content">
+            <% if (req.query.err && req.query.err == "none") { %>
+            <div class="border border-green-400/10 bg-green-400/5 p-4">
+               <div class="flex">
+                  <div class="flex-shrink-0">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-6 w-6 text-green-400">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                           d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                     </svg>
+                  </div>
+                  <div class="ml-3">
+                     <p class="text-sm text-green-400 mt-0.5">
+                        Success! Action completed.
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <% } %>
+            <header>
+               <div class="grid grid-cols-1 bg-zinc-700/10 sm:grid-cols-2 lg:grid-cols-3">
+                  <div class="border-t border-b border-white/5 py-6 px-4 sm:px-6 lg:px-8">
+                     <p class="text-sm font-medium leading-6 text-zinc-400">Buy memory</p>
+                     <p class="mt-2 flex items-baseline gap-x-2">
+                        <span class="memory-value text-4xl font-semibold tracking-tight text-white">1 GiB</span>
+                        <span class="unit-text text-md text-zinc-400">for 100 coins</span>
+                        <a onclick="window.location.href = '../buyram?amount=1'" class="text-zinc-400 hover:text-white transition ml-1 cursor-pointer">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                           </svg>
+                        </a>
+                     </p>
+                  </div>
+                  <div class="border-t border-b border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l">
+                     <p class="text-sm font-medium leading-6 text-zinc-400">Buy storage</p>
+                     <p class="mt-2 flex items-baseline gap-x-2">
+                        <span class="memory-value text-4xl font-semibold tracking-tight text-white">5 GiB</span>
+                        <span class="unit-text text-md text-zinc-400">for 100 coins</span>
+                        <a onclick="window.location.href = '../buydisk?amount=1'" class="text-zinc-400 hover:text-white transition ml-1 cursor-pointer">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                           </svg>
+                        </a>
+                     </p>
+                  </div>
+                  <div class="border-t border-b border-white/5 py-6 px-4 sm:px-6 lg:px-8 lg:border-l">
+                     <p class="text-sm font-medium leading-6 text-zinc-400">Buy CPU cores</p>
+                     <p class="mt-2 flex items-baseline gap-x-2">
+                        <span class="memory-value text-4xl font-semibold tracking-tight text-white">1 Core</span>
+                        <span class="unit-text text-md text-zinc-400">for 200 coins</span>
+                        <a onclick="window.location.href = '../buycpu?amount=1'" class="text-zinc-400 hover:text-white transition ml-1 cursor-pointer">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                           </svg>
+                        </a>
+                     </p>
+                  </div>
+               </div>
+            </header>
+         </main>
+      </div>
+      </div>
