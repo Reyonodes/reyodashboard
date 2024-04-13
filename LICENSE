@@ -1,12 +1,39 @@
 **Reyodash License Agreement**
 
-This License Agreement is entered into between the Licensor "Reyonodes" and any person obtaining a copy of the Reyodash software, hereinafter referred to as the "Licensee". Subject to the terms and conditions of this Agreement, Reyodash is a forked version of holaclient v1.5.7 with improved backend and a new theme. The user is not authorized to use the HolaClient software for any purpose as this is just for a display purpose to maintain trust between the client and the user. The Reyodash software and its source code are proprietary to the owner (Reyo). All rights not expressly granted herein are reserved.
+This License Agreement ("Agreement") is entered into between the Licensor "Reyonodes" and any person obtaining a copy of the Reyodash software, hereinafter referred to as the "Licensee". By accessing or using the Reyodash software, the Licensee agrees to be bound by the terms and conditions of this Agreement.
 
-You should not:
-a. Use this dashboard or its frontend.
+**1. License Grant**
 
-By viewing this LICENSE, the Licensee agrees to be bound by the terms and conditions of this Agreement.
+Subject to the terms and conditions of this Agreement, Reyonodes grants the Licensee a limited, non-exclusive, non-transferable license to use the Reyodash software for display purposes only. Reyodash is a software available on GitHub solely for demonstration and display purposes. The Licensee acknowledges that the Reyodash software and its components, including the backend forked from Holaclient v1.5.7, are proprietary to Reyonodes, and all rights not expressly granted herein are reserved.
 
-Reyo
-(Creator & Owner)
+**2. Restrictions**
+
+The Licensee shall not:
+
+a. Use the frontend code of Reyodash for any purpose, including but not limited to reproduction, modification, or distribution.
+
+**3. Ownership**
+
+The Reyodash software, including its frontend and backend components, are proprietary to Reyonodes, the creator and owner. The Licensee acknowledges that no ownership rights are transferred under this Agreement, and Reyonodes retains all right, title, and interest in and to the Reyodash software.
+
+**4. Termination**
+
+This Agreement shall terminate automatically if the Licensee breaches any of its terms and conditions. Upon termination, the Licensee must cease all use of the Reyodash software and destroy all copies in its possession or control.
+
+**5. Disclaimer of Warranty**
+
+THE REYODASH SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. REYONODES DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. REYONODES DOES NOT WARRANT THAT THE OPERATION OF THE REYODASH SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE.
+
+**6. Limitation of Liability**
+
+IN NO EVENT SHALL REYONODES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, USE, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR RELATING TO THE USE OR INABILITY TO USE THE REYODASH SOFTWARE, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), OR ANY OTHER LEGAL THEORY, EVEN IF REYONODES HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+**7. General**
+
+This Agreement constitutes the entire agreement between the parties concerning the subject matter hereof and supersedes all prior or contemporaneous agreements, understandings, and representations, whether written or oral. This Agreement may only be modified by a written amendment signed by an authorized representative of each party. If any provision of this Agreement is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable, and the remaining provisions of this Agreement shall not be affected thereby. This Agreement shall be governed by and construed in accordance with the laws of [insert jurisdiction]. Any disputes arising under or in connection with this Agreement shall be subject to the exclusive jurisdiction of the courts located in [insert jurisdiction].
+
+By accessing or using the Reyodash software, the Licensee acknowledges that they have read this Agreement, understand it, and agree to be bound by its terms and conditions.
+
+**Reyonodes**  
+(Creator & Owner)  
 13.04.2024
